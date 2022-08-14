@@ -4,7 +4,7 @@
 }
 
 .sidebar {
-  background-color: lightgreen;
+  background-color: lightblue;
   border-radius: 5px;
   box-shadow: 0 0 2px gray;
   margin-right: 20px;
@@ -32,4 +32,32 @@
   box-shadow: 0 0 2px gray;
   height: 82vh;
   width: 100%;
+}
+
+.menu {
+  margin-top: 100px;
+}
+
+.menu-item {
+  margin-top: 30px;
+}
+
+.menu-item a {
+  color: black;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.menu-item i {
+  color: orangered;
+  text-decoration: none;
+  font-size: 18px;
+  margin: 0 15px;
+}
+
+.active-menu-item {
+  color: white;
+  background-color: darkcyan;
+  padding: 5px;
+  border-radius: 5px;
 }
