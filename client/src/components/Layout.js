@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import "../layout.css";
-import { Link, useLocation } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function Layout({ children }) {
   // to hide side bar
   const [collapsed, setCollapsed] = useState(false);
   const { user } = useSelector((state) => state.user);
+  const navigate = useNavigate();
   const location = useLocation();
   const userMenu = [
     {
@@ -29,21 +30,38 @@ function Layout({ children }) {
       path: "/profile",
       icon: "ri-user-3-line",
     },
+  ];
+  const adminMenu = [
     {
-      name: "Logout",
-      path: "/logout",
-      icon: "ri-logout-box-r-line",
+      name: "Home",
+      path: "/",
+      icon: "ri-home-line",
+    },
+    {
+      name: "Users",
+      path: "/users",
+      icons: "ri-user-line",
+    },
+    {
+      name: "Doctors",
+      path: "/doctors",
+      icons: "ri-user-heart-line",
+    },
+    {
+      name: "Profile",
+      path: "/profile",
+      icon: "ri-user-3-line",
     },
   ];
-
-  const menuToBeRendered = userMenu;
+  // Which menu it is
+  const menuToBeRendered = user?.isActive ? adminMenu : userMenu;
 
   return (
     <div className="main">
       <div className="d-flex layout">
         <div className="sidebar">
           <div className="sidebar-header">
-            <h1>HA</h1>
+            <h1 className="logo">HA</h1>
           </div>
           <div className="menu">
             {menuToBeRendered.map((menu) => {
@@ -59,6 +77,17 @@ function Layout({ children }) {
                 </div>
               );
             })}
+            {/* LOGOUT FUNCTION  - IT IS STATIC FOR ALL USERS*/}
+            <div
+              className={`d-flex menu-item `}
+              onClick={() => {
+                localStorage.clear();
+                navigate("/login");
+              }}
+            >
+              <i className="ri-logout-circle-line"></i>
+              {!collapsed && <Link to="/login">Logout</Link>}
+            </div>
           </div>
         </div>
         <div className="content">
