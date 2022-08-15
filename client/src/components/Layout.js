@@ -78,7 +78,7 @@ function Layout({ children }) {
             )}
             {/* Notification icon */}
             <div className="d-flex align-items-center px-4">
-              <i className="ri-notification-4-line header-action-icon px-3"></i>
+              <i className="ri-notification-4-line header-action-icon px-3 "></i>
               <Link className="anchor" to="/" profile>
                 {user?.name}
               </Link>
