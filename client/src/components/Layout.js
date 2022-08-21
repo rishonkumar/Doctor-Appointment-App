@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import "../layout.css";
-import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Badge } from "antd";
 
 function Layout({ children }) {
-  // to hide side bar
   const [collapsed, setCollapsed] = useState(false);
   const { user } = useSelector((state) => state.user);
+
   const navigate = useNavigate();
   const location = useLocation();
   const userMenu = [
@@ -18,19 +19,33 @@ function Layout({ children }) {
     {
       name: "Appointments",
       path: "/appointments",
-      icon: "ri-file-list-3-line",
+      icon: "ri-file-list-line",
     },
     {
       name: "Apply Doctor",
       path: "/apply-doctor",
       icon: "ri-hospital-line",
     },
+  ];
+
+  const doctorMenu = [
+    {
+      name: "Home",
+      path: "/",
+      icon: "ri-home-line",
+    },
+    {
+      name: "Appointments",
+      path: "/doctor/appointments",
+      icon: "ri-file-list-line",
+    },
     {
       name: "Profile",
-      path: "/profile",
-      icon: "ri-user-3-line",
+      path: `/doctor/profile/${user?._id}`,
+      icon: "ri-user-line",
     },
   ];
+
   const adminMenu = [
     {
       name: "Home",
@@ -39,37 +54,43 @@ function Layout({ children }) {
     },
     {
       name: "Users",
-      path: "/users",
-      icons: "ri-user-line",
+      path: "/admin/userslist",
+      icon: "ri-user-line",
     },
     {
       name: "Doctors",
-      path: "/doctors",
-      icons: "ri-user-heart-line",
+      path: "/admin/doctorslist",
+      icon: "ri-user-star-line",
     },
     {
       name: "Profile",
       path: "/profile",
-      icon: "ri-user-3-line",
+      icon: "ri-user-line",
     },
   ];
-  // Which menu it is
-  const menuToBeRendered = user?.isActive ? adminMenu : userMenu;
 
+  const menuToBeRendered = user?.isAdmin
+    ? adminMenu
+    : user?.isDoctor
+    ? doctorMenu
+    : userMenu;
+  const role = user?.isAdmin ? "Admin" : user?.isDoctor ? "Doctor" : "User";
   return (
     <div className="main">
       <div className="d-flex layout">
         <div className="sidebar">
           <div className="sidebar-header">
-            <h1 className="logo">HA</h1>
+            <h1 className="logo">SH</h1>
+            <h1 className="role">{role}</h1>
           </div>
+
           <div className="menu">
             {menuToBeRendered.map((menu) => {
               const isActive = location.pathname === menu.path;
               return (
                 <div
                   className={`d-flex menu-item ${
-                    isActive && `active-menu-item`
+                    isActive && "active-menu-item"
                   }`}
                 >
                   <i className={menu.icon}></i>
@@ -77,7 +98,6 @@ function Layout({ children }) {
                 </div>
               );
             })}
-            {/* LOGOUT FUNCTION  - IT IS STATIC FOR ALL USERS*/}
             <div
               className={`d-flex menu-item `}
               onClick={() => {
@@ -90,29 +110,35 @@ function Layout({ children }) {
             </div>
           </div>
         </div>
+
         <div className="content">
           <div className="header">
-            {/* For collapsed => true*/}
-
             {collapsed ? (
               <i
-                className="ri-menu-2-line header-action-icon"
+                className="ri-menu-2-fill header-action-icon"
                 onClick={() => setCollapsed(false)}
               ></i>
             ) : (
               <i
-                className="ri-close-line header-action-icon"
+                className="ri-close-fill header-action-icon"
                 onClick={() => setCollapsed(true)}
               ></i>
             )}
-            {/* Notification icon */}
+
             <div className="d-flex align-items-center px-4">
-              <i className="ri-notification-4-line header-action-icon px-3 "></i>
-              <Link className="anchor" to="/" profile>
+              <Badge
+                count={user?.unseenNotifications.length}
+                onClick={() => navigate("/notifications")}
+              >
+                <i className="ri-notification-line header-action-icon px-3"></i>
+              </Badge>
+
+              <Link className="anchor mx-2" to="/profile">
                 {user?.name}
               </Link>
             </div>
           </div>
+
           <div className="body">{children}</div>
         </div>
       </div>

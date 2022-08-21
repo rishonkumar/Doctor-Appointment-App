@@ -13,10 +13,6 @@ const doctorSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    email: {
-      type: String,
-      required: true,
-    },
     phoneNumber: {
       type: String,
       required: true,
@@ -37,22 +33,17 @@ const doctorSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    feePerConsultation: {
+    feePerCunsultation: {
       type: Number,
       required: true,
     },
-    consultationHours: {
-      type: Number,
+    timings: {
+      type: Array,
       required: true,
     },
-
-    fromTime: {
-      type: Number,
-      required: true,
-    },
-    toTime: {
-      type: Number,
-      required: true,
+    status: {
+      type: String,
+      default: "pending",
     },
   },
   {

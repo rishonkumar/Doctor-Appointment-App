@@ -1,28 +1,35 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
 
 * {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
 }
-/* ANTD override */
+
+/* antd override */
 input {
   border-radius: 2px !important;
-  border: 1px solid gray !important;
+  border: 1px solid rgba(128, 128, 128, 0.521) !important;
   height: 40px !important;
 }
-
-input:focus {
-  outline: none;
-  box-shadow: none;
-  border: 1px gray !important;
+input:focus,
+.ant-picker {
+  outline: none !important;
+  box-shadow: none !important;
+  border: 1px solid gray !important;
 }
-
 label {
   font-size: 16px !important;
-  color: black;
+  color: black !important;
 }
-
 .ant-form-item {
   margin: 10px 0 !important;
+}
+.ant-picker-input input {
+  border: none !important;
+}
+.ant-picker {
+  border-radius: 2px !important;
+  border: 1px solid rgba(128, 128, 128, 0.521) !important;
+  height: 40px !important;
 }
 /* Common styling */
 
@@ -30,9 +37,7 @@ label {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* height: 100vh; */
-  /* opacity: 0.8; */
-  background-color: rgba(0, 0, 0, 0.706);
+  background-color: rgba(0, 0, 0, 0.704);
   position: fixed;
   top: 0;
   left: 0;
@@ -40,47 +45,60 @@ label {
   height: 100%;
   z-index: 9999;
 }
-
 .spinner-border {
   width: 5rem;
   height: 5rem;
   color: white !important;
 }
 
-.card-title {
-  font-size: 1.5rem;
+.page-title {
+  font-size: 25px;
+  color: rgba(0, 0, 0, 0.833);
   font-weight: bold;
 }
-
+.card-title {
+  font-size: 22px;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.627);
+}
 .normal-text {
   font-size: 1rem;
 }
-
 .card {
-  box-shadow: 0 0 2px gray;
+  box-shadow: 0 0 2px rgb(189, 188, 188);
   border-radius: 0 !important;
 }
-
 .primary-button {
-  background-color: lightgreen !important;
-  border-color: darkcyan !important;
+  background-color: #005555 !important;
+  border-color: #005555 !important;
   height: 40px !important;
   width: 100% !important;
-  color: black !important;
-  font-size: 16x !important;
+  color: white !important;
+  font-size: 16px !important;
+  width: max-content !important;
+}
+.full-width-button {
+  width: 100% !important;
+}
+p {
+  color: rgba(0, 0, 0, 0.673) !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 .anchor {
   color: black !important;
   text-decoration: underline;
-  font-size: 16px;
+  cursor: pointer;
+  font-size: 16px !important;
 }
-
 .anchor:hover {
   text-decoration: underline !important;
 }
 
-
+.cursor-pointer {
+  cursor: pointer;
+}
 
 /* authentication pages */
 
@@ -89,9 +107,8 @@ label {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: lightcoral;
+  background-color: #005555;
 }
-
 .authentication-form {
   width: 400px;
 }
@@ -100,7 +117,7 @@ label {
   font-size: 1.5rem;
   font-weight: bold;
   background-color: orangered;
-  color: wheat !important;
+  color: white !important;
   max-width: max-content !important;
   padding: 7px 15px;
   margin-left: -40px;
