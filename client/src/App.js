@@ -5,8 +5,8 @@ import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import Home from "./Pages/Home";
 import { useSelector } from "react-redux";
-import ProtectedRoutes from "./components/ProtectedRoutes";
-import PublicRoutes from "./components/PublicRoutes";
+import ProtectedRoute from "./components/ProtectedRoutes";
+import PublicRoute from "./components/PublicRoutes";
 import ApplyDoctor from "./Pages/ApplyDoctor";
 import Notifications from "./Pages/Notifications";
 
@@ -16,7 +16,7 @@ function App() {
     <BrowserRouter>
       {loading && (
         <div className="spinner-parent">
-          <div className="spinner-border" role="status"></div>
+          <div class="spinner-border" role="status"></div>
         </div>
       )}
       <Toaster position="top-center" reverseOrder={false} />
@@ -24,41 +24,41 @@ function App() {
         <Route
           path="/login"
           element={
-            <PublicRoutes>
+            <PublicRoute>
               <Login />
-            </PublicRoutes>
+            </PublicRoute>
           }
         />
         <Route
           path="/register"
           element={
-            <PublicRoutes>
+            <PublicRoute>
               <Register />
-            </PublicRoutes>
+            </PublicRoute>
           }
         />
         <Route
           path="/"
           element={
-            <ProtectedRoutes>
+            <ProtectedRoute>
               <Home />
-            </ProtectedRoutes>
+            </ProtectedRoute>
           }
         />
         <Route
           path="/apply-doctor"
           element={
-            <ProtectedRoutes>
+            <ProtectedRoute>
               <ApplyDoctor />
-            </ProtectedRoutes>
+            </ProtectedRoute>
           }
         />
         <Route
           path="/notifications"
           element={
-            <ProtectedRoutes>
+            <ProtectedRoute>
               <Notifications />
-            </ProtectedRoutes>
+            </ProtectedRoute>
           }
         />
       </Routes>
