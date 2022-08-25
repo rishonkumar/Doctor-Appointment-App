@@ -6,7 +6,10 @@ app.use(express.json());
 const userRoute = require("./routes/userRoute");
 
 // if endpoint is api/user go and check userRoute
+
 app.use("/api/user", userRoute);
+// app.use("/api/admin", adminRoute);
+// app.use("/api/doctor", doctorRoute);
 const port = process.env.PORT || 5000;
 
 // console.log(process.env.MONGO_URL);
